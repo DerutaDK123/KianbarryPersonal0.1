@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Heclava&family=Apdos&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Apdos', sans-serif;
+            background-color: #121212;
+            color: #F8F8FF; /* Ghost White */
+        }
+
+        header {
+            background-color: #1E1E1E;
+            padding: 20px;
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        section {
+            padding: 20px;
+            margin: 20px;
+            background-color: #1E1E1E;
+            border-radius: 8px;
+        }
+
+        h2 {
+            font-family: 'Heclava', sans-serif;
+            color: #F8F8FF;
+            border-bottom: 1px solid #F8F8FF;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            line-height: 1.6;
+            color: #D3D3D3;
+        }
+
+        .listing-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .flip-box {
+            background-color: transparent;
+            width: 300px;
+            height: 520px;
+            perspective: 1000px; /* Adds 3D effect */
+            z-index: 1;
+            position: relative;
+            overflow: hidden; /* Ensures content doesn't overflow the card */
+        }
+
+        .flip-box-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: left;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-box:hover .flip-box-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-box-front, .flip-box-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 8px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .flip-box-front {
+            background-color: #1E1E1E; /* Dark theme background */
+            color: #F8F8FF; /* Ghost white text */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border: 1px solid #333333;
+        }
+
+        .flip-box-back {
+            background-color: #F8F8FF; /* Ghost white background */
+            color: #121212; /* Black text */
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Align content to the top */
+            align-items: flex-start;
+            border: 1px solid #333333;
+            overflow-y: auto; /* Allow scrolling if content exceeds height */
+        }
+
+        .flip-box-back h2 {
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            color: #121212; /* Black text for heading */
+        }
+
+        .flip-box-back ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .flip-box-back li {
+            margin-bottom: 10px;
+            color: #121212; /* Black text for the items */
+        }
+
+        .flip-box-back strong {
+            color: #333333; /* Darker color for emphasis */
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #1E1E1E;
+            font-size: 0.9em;
+            color: #696969;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center; /* Center align the skills */
+            margin-top: 20px;
+}
+
+        .skill {
+            background-color: #333333; /* Dark background for each skill */
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1em;
+            color: #F8F8FF; /* Ghost white text */
+            transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+    .skill:hover {
+    background-color: #555555; /* Lighter background on hover */
+    transform: scale(1.05); /* Slight scale effect */
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.social-links a {
+    color: #F8F8FF;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+
+.pricing-section {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.card {
+  background: #121212;
+  border-radius: 8px;
+  padding: 20px;
+  width: 500px;
+  height: 500px;
+  color: ghostwhite;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+.basic-tier { border: 2px solid #4CAF50; }
+.standard-tier { border: 2px solid #FFC107; }
+.premium-tier { border: 2px solid #FF5722; }
+
+.price {
+  font-size: 2em;
+  margin: 10px 0;
+}
+
+button {
+  background: ghostwhite;
+  color: #121212;
+  border: none;
+  padding: 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #e0e0e0;
+}
+
+.modal-trigger {
+    padding: 0.8rem 1.5rem;
+    background-color: ghostwhite;
+    color: #000;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-trigger:hover {
+    background-color: #333;
+    color: ghostwhite;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.modal-content {
+    background-color: #222;
+    color: ghostwhite;
+    padding: 20px;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: ghostwhite;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    color: #ddd;
+}
+
+/* Minesweeper Game Styling */
+#game-container {
+    text-align: center;
+}
+
+button {
+    background-color: ghostwhite;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #555;
+    color: ghostwhite;
+}
+
+/* Minefield Grid */
+#minefield {
+    display: grid;
+    gap: 2px;
+    margin: 20px auto;
+    background-color: #222;
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.cell {
+    width: 40px;
+    height: 40px;
+    background-color: #444;
+    color: ghostwhite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.cell:hover {
+    background-color: #555;
+}
+
+.cell.revealed {
+    background-color: #888;
+    cursor: default;
+}
+
+.cell.mine {
+    background-color: #8b0000;
+    color: ghostwhite;
+}
+
+#game-status {
+    font-size: 1.1rem;
+    margin-top: 15px;
+}
+
+    </style>
+</head>
+<body>
+
+<header>
+    Kian Barry
+</header>
+
+<section>
+    <h2>Resume</h2>
+    <div class="content">
+        <p>I am a highly skilled and adaptable web developer with 
+            proficiency in multiple web development languages and full 
+            stack capabilities. As a fast learner, I continuously 
+            seek to enhance my expertise and stay up to date with the latest industry 
+            techniques and technologies. My commitment to constant improvement 
+            enables me to deliver high-quality, efficient, and innovative 
+            solutions in web development projects.</p>
+    </div>
+    <div class="content">
+        <p> click here to open a surprise!!!</p>
+        <button id="openModal" class="modal-trigger">Click me</button>
+
+<!-- Modal Structure -->
+<div id="simpleModal" class="modal">
+    <div class="modal-content">
+        <span id="closeModal" class="modal-close">&times;</span>
+        <div id="game-container">
+            <h1>Minesweeper</h1>
+            <button onclick="startGame()">Start New Game</button>
+            <div id="minefield"></div>
+            <p id="game-status"></p>
+          </div>
+    </div>
+</div>
+</section>
+
+<section>
+    <h2>Experience</h2>
+    <div class="listing-container">
+
+        <!-- First Flip Card -->
+        <div class="flip-box">
+            <div class="flip-box-inner">
+                <div class="flip-box-front">
+                    <h2>Software Engineer</h2>
+                    <p>
+                        This was my biggest project /  job , where I was hired by a startup company as a Software Engineer. I
+                        was the sole lead, tasked with building their website and mobile app. given I was there 4 months I had to step away to
+                        foucs on other opportunites
+                    </p>
+                </div>
+                <div class="flip-box-back">
+                    <h2>Description</h2>
+                    <p>I built the foundation for the company feeperks.com, a school management system for parents to be more involved with the school.</p>
+                    <ul>
+                        <li><strong>Website Development:</strong> Full development using React and Node.js.</li>
+                        <li><strong>Mobile App Development:</strong> Cross-platform app development.</li>
+                        <li><strong>Server and System Development:</strong> Managed backend and deployment.</li>
+                        <li><strong>UI/UX Design:</strong> Provided UX/UI sketches and final designs.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Flip Card -->
+        <div class="flip-box">
+            <div class="flip-box-inner">
+                <div class="flip-box-front">
+                    <h2>Admin Assistant - 2one2 BlueStar Sanlam </h2>
+                    <p>
+                        Currently assisting financial advisers with their admin work. 2one2 is its own company, supported by Sanlam.
+                    </p>
+                </div>
+                <div class="flip-box-back">
+                    <h2>Description</h2>
+                    <p>Assisting with various administrative duties, including document preparation and client management.</p>
+                    <ul>
+                        <li><strong>Intermediary Work</strong> Client and Adviser Coordination: Act as a liaison between clients and advisers, 
+                        ensuring smooth communication and facilitating necessary documentation or information exchange.</li>
+
+                        <li><strong>Administrative Work</strong> Data and Record Management: Maintain up-to-date records, organize files, and manage essential documentation to ensure accurate information tracking.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section>
+    <h2>Rates - If you wish for me to build you a online portfolio</h2>
+    <div class="content">
+        <div class="pricing-section">
+            <div class="card basic-tier">
+              <h2>Basic</h2>
+              <p>Basic layout that provieds a simple design that gets the point across</p>
+              <p class="price">R500</p>
+              <button>Contact me</button>
+            </div>
+            <div class="card standard-tier">
+              <h2>Standard</h2>
+              <p>Greater design for a Portfolio and has personalized design and animations</p>
+              <p class="price">R1000</p>
+              <button>Contact me</button>
+            </div>
+            <div class="card premium-tier">
+              <h2>Premium</h2>
+              <p>All-inclusive premium  </p>
+              <p class="price">R1500</p>
+              <button>Contact me</button>
+            </div>
+          </div>
+          
+    </div>
+</section>
+
+<section>
+    <h2>Skills</h2>
+    <div class="skills">
+        <div class="skill">HTML</div>
+        <div class="skill">CSS</div>
+        <div class="skill">JavaScript</div>
+        <div class="skill">React</div>
+        <div class="skill">Computer skills</div>
+        <div class="skill">MS Office</div>
+        <div class="skill">UX/UI</div>
+        <div class="skill">PHP</div>
+        <div class="skill">Node.js</div>
+        <div class="skill">React Native</div>
+        <div class="skill">Kotlin</div>
+        <div class="skill">Photoshop</div>
+        <div class="skill">MySQL</div>
+        <div class="skill">Flutter</div>
+        <div class="skill">WrodPress</div>
+        <!-- Add more skills as needed -->
+    </div>
+</section>
+
+<section>
+    <h2>Contact & Social Links</h2>
+    <div class="social-links">
+        <a href="https://www.linkedin.com/in/kiannicholasbarry/" target="_blank">LinkedIn</a>
+        <a href="https://github.com/Deruta18" target="_blank">GitHub</a>
+        <a href="https://x.com/kian_barry6069" target="_blank">Twitter</a>
+        <!-- Add more social links as needed -->
+    </div>
+</section>
+
+<script>
+// Open and close modal functionality
+document.getElementById('openModal').addEventListener('click', function() {
+    document.getElementById('simpleModal').style.display = 'flex';
+});
+
+document.getElementById('closeModal').addEventListener('click', function() {
+    document.getElementById('simpleModal').style.display = 'none';
+});
+
+// Close modal when clicking outside of modal content
+window.onclick = function(event) {
+    const modal = document.getElementById('simpleModal');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+};
+
+const rows = 10;
+const columns = 10;
+const minesCount = 15;
+let minefield = [];
+let gameOver = false;
+
+function startGame() {
+  minefield = [];
+  gameOver = false;
+  document.getElementById('game-status').textContent = '';
+  createMinefield();
+  renderMinefield();
+}
+
+function createMinefield() {
+  // Initialize minefield with empty cells
+  for (let i = 0; i < rows; i++) {
+    minefield[i] = [];
+    for (let j = 0; j < columns; j++) {
+      minefield[i][j] = { mine: false, revealed: false, adjacentMines: 0 };
+    }
+  }
+
+  // Place mines randomly
+  let minesPlaced = 0;
+  while (minesPlaced < minesCount) {
+    const row = Math.floor(Math.random() * rows);
+    const col = Math.floor(Math.random() * columns);
+    if (!minefield[row][col].mine) {
+      minefield[row][col].mine = true;
+      minesPlaced++;
+      updateAdjacentCounts(row, col);
+    }
+  }
+}
+
+function updateAdjacentCounts(row, col) {
+  for (let i = -1; i <= 1; i++) {
+    for (let j = -1; j <= 1; j++) {
+      const newRow = row + i;
+      const newCol = col + j;
+      if (isValidCell(newRow, newCol) && !minefield[newRow][newCol].mine) {
+        minefield[newRow][newCol].adjacentMines++;
+      }
+    }
+  }
+}
+
+function isValidCell(row, col) {
+  return row >= 0 && row < rows && col >= 0 && col < columns;
+}
+
+function renderMinefield() {
+  const minefieldDiv = document.getElementById('minefield');
+  minefieldDiv.innerHTML = '';
+  minefieldDiv.style.gridTemplateColumns = `repeat(${columns}, 40px)`;
+
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < columns; j++) {
+      const cell = document.createElement('div');
+      cell.classList.add('cell');
+      cell.dataset.row = i;
+      cell.dataset.col = j;
+      cell.addEventListener('click', handleCellClick);
+      minefieldDiv.appendChild(cell);
+    }
+  }
+}
+
+function handleCellClick(event) {
+  if (gameOver) return;
+
+  const row = parseInt(event.target.dataset.row);
+  const col = parseInt(event.target.dataset.col);
+  revealCell(row, col);
+}
+
+function revealCell(row, col) {
+  if (!isValidCell(row, col) || minefield[row][col].revealed) return;
+
+  const cell = document.querySelector(`.cell[data-row="${row}"][data-col="${col}"]`);
+  minefield[row][col].revealed = true;
+
+  if (minefield[row][col].mine) {
+    cell.classList.add('mine');
+    cell.textContent = '💣';
+    endGame(false);
+  } else {
+    cell.classList.add('revealed');
+    const adjacentMines = minefield[row][col].adjacentMines;
+    cell.textContent = adjacentMines > 0 ? adjacentMines : '';
+
+    if (adjacentMines === 0) {
+      // Recursively reveal adjacent cells if no adjacent mines
+      for (let i = -1; i <= 1; i++) {
+        for (let j = -1; j <= 1; j++) {
+          revealCell(row + i, col + j);
+        }
+      }
+    }
+
+    checkWin();
+  }
+}
+
+function endGame(won) {
+  gameOver = true;
+  document.getElementById('game-status').textContent = won ? 'Congratulations, you win!' : 'Game Over!';
+  
+  // Reveal all mines if lost
+  if (!won) {
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < columns; j++) {
+        if (minefield[i][j].mine) {
+          const cell = document.querySelector(`.cell[data-row="${i}"][data-col="${j}"]`);
+          cell.classList.add('mine');
+          cell.textContent = '💣';
+        }
+      }
+    }
+  }
+}
+
+function checkWin() {
+  let revealedCount = 0;
+
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < columns; j++) {
+      if (minefield[i][j].revealed) revealedCount++;
+    }
+  }
+
+  if (revealedCount === rows * columns - minesCount) {
+    endGame(true);
+  }
+}
+
+// Initialize the game on load
+window.onload = startGame;
+</script>
+
+<footer>
+    &copy; 2024 Your Name. All rights reserved.
+</footer>
+
+</body>
+</html>
